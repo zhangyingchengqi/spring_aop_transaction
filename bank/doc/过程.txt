@@ -1,0 +1,76 @@
+1. spring整合jdbc:
+   1) jar包:
+      <!-- 请使用oracle 驱动,这里是暂用mysql代替 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.18</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.yc.drivers</groupId>
+			<artifactId>oracle</artifactId>
+			<version>14</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.4.RELEASE</version>
+		</dependency>
+	2) 在AppConfig类中加入  IOC这个数据源类对象. 
+	    @Configuration
+		@ComponentScan(basePackages="com.yc")
+		@EnableAspectJAutoProxy
+		public class AppConfig {
+
+			//@Bean    //      id: dataSource    value:  DriverManagerDataSource
+			public  DriverManagerDataSource   dataSource() {
+				DriverManagerDataSource dataSource = new DriverManagerDataSource();
+				dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+				dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:ORCL");
+				dataSource.setUsername("scott");
+				dataSource.setPassword("a");
+				return dataSource;
+			}
+			
+			@Bean
+			public  DriverManagerDataSource   mysqlDataSource() {
+				DriverManagerDataSource dataSource = new DriverManagerDataSource();
+				dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+				dataSource.setUrl("jdbc:mysql://localhost:3306/bank");
+				dataSource.setUsername("scott");
+				dataSource.setPassword("a");
+				return dataSource;
+			}
+			
+			
+		}
+	3) 引入junit测试: 
+	    <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.2.4.RELEASE</version>
+		</dependency>
+
+		代码: 
+		@RunWith(SpringJUnit4ClassRunner.class)   // 请导入    spring-test包
+		@ContextConfiguration(classes = {AppConfig.class})    //IOC
+		public class TestJdbc {
+
+			@Autowired      //  DI  
+			private DriverManagerDataSource dmd;
+			
+			@Test   //这是一个测试用例
+			public void testDataSource() {
+				Assert.notNull(  dmd );
+				System.out.println(     dmd );
+			}
+			
+		}
