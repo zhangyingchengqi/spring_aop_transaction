@@ -22,4 +22,11 @@ public class Account implements Serializable{
 		this.balance = balance;
 	}
 
+	@Override
+	public String toString() {
+		return "Account [accountid=" + accountid + ", balance=" + balance + "]";
+	}
+	
+	
+
 }

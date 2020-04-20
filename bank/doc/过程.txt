@@ -1,3 +1,10 @@
+1. 模仿银行柜员功能:  存，取，转账，查询
+2. Web
+3. spring + servlet + jdbc+   oracle
+   vue
+   事务管理. 
+
+
 1. spring整合jdbc:
    1) jar包:
       <!-- 请使用oracle 驱动,这里是暂用mysql代替 -->

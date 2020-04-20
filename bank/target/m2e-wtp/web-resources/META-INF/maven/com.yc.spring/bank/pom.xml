@@ -33,20 +33,23 @@
 			<artifactId>spring-context</artifactId>
 			<version>5.2.4.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.2.4.RELEASE</version>
 		</dependency>
+
 		
-		
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>5.2.4.RELEASE</version>
 		</dependency>
 
+		<!--   org.aspectj目录    aspectweaver.1.9.5.jar  -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -59,16 +62,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.18</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.yc.drivers</groupId>
 			<artifactId>oracle</artifactId>
 			<version>14</version>
 		</dependency>
-		
-		
-		
-		
+
+
+
+
 
 
 

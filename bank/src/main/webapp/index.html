@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <div id="app">
+	   <form action="" method="post">
+	   		账号:<input type="text" name="accountid" v-model="accountid" /><br />
+	   		操作金额:<input type="text" name="balance" v-model="balance" /><br />
+	   		转入账号:<input type="text" name="inaccountid" v-model="inaccountid"  /><br />
+	   		<input type="button" value="存款" class="btn"  id="submit" @click="deposite()">
+	   		<input type="button" value="取款" class="btn"  id="submit" @click="withdraw()">
+	   		<input type="button" value="转账" class="btn"  id="submit" @click="transfer()">
+	   		<input type="button" value="查询" class="btn"  id="submit" @click="query()">
+	   		
+	   		<div id="result"></div>
+	   </form>
+   
+  </div>
+
+
+ <!--  在网页里面引入javascript    大家注意顺序  -->
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js" ></script>
+	
+	<script type="text/javascript">
+	 let vm=new Vue({
+		el:"#app",
+		data:{
+			accountid:"",
+			balance:0.0,
+			inaccountid:""
+		},
+		methods:{
+			deposite:function(){
+				var params = new URLSearchParams();
+				params.append('op', 'deposite');
+				params.append('accountid', this.accountid);
+				params.append('balance',this.balance);
+				axios.post('bankaccount.action', params).then( yc =>{
+					if(yc.data.code==0){
+						alert(yc.data.msg);
+					}else{
+						$("#result").html(yc.data.obj.accountid+"存款成功,余额:"+yc.data.obj.balance);
+					}
+				});
+			}
+		}
+	 });
+	</script>
+
+</body>
+</html>

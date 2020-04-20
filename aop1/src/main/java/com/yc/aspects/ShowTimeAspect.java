@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 //POJO
 
-@Aspect   //声明切面:    一个关注点的模块(   切入点和增强  )
+@Aspect   //声明切面:    一个关注点的模块(   切入点表达式和增强类型，增强的实现  )
 @Component
 public class ShowTimeAspect {
 	

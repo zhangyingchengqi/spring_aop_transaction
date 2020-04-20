@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 
 import com.yc.AppConfig;
 import com.yc.bean.Account;
+import com.yc.biz.AccountBiz;
 import com.yc.dao.AccountDao;
 import com.yc.dao.InAccountDao;
 
@@ -30,6 +31,9 @@ public class TestJdbc {
 	@Autowired
 	private InAccountDao inAccountDao;
 	
+	@Autowired
+	private AccountBiz accountBiz;
+	
 	@Test   //这是一个测试用例
 	public void testDataSource() throws SQLException {
 		Assert.notNull(  dmd );
@@ -40,9 +44,29 @@ public class TestJdbc {
 	@Test   //这是一个测试用例
 	public void testAccountDao() throws SQLException {
 		Account a=new Account();
-		a.setAccountid(    "1"   );
-		a.setBalance(1);
+		a.setAccountid(    "2"   );
+		a.setBalance(100);
 		accountDao.addAccount(a);
+		
+		
+		//new   java.sql.SQLException();   Exception    Dao   @Repository
+		//new org.springframework.dao.DataIntegrityViolationException();   //   RuntimeException
+		//   spring   事务异常   -》  RuntimeException
+	}
+	
+	
+	@Test   //这是一个测试用例
+	public void testWithdraw() throws SQLException {
+		Account a=accountBiz.withdraw("2", 100);
+		System.out.println(  a );    //  Account   2  98        InAccount    
+	}
+	
+	@Test   //这是一个测试用例
+	public void testTransfer() throws SQLException {
+		
+		Account a=accountBiz.transfer("2", 100, "1");
+		
+		System.out.println(  a );    //  Account   2  98        InAccount    
 	}
 	
 }
